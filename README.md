@@ -12,7 +12,7 @@
 
 **Upload an elephant image → Get an instant African or Asian prediction → See the confidence score & explanation.**
 
-[💻 GitHub Repo](https://github.com/Mohit01112/elephant-species-classification) · [🐛 Report Bug](#) · [✨ Request Feature](#)
+[🚀 Live Demo](https://elephant-species-classification.onrender.com/) · [💻 GitHub Repo](https://github.com/Mohit01112/elephant-species-classification) · [🐛 Report Bug](#) · [✨ Request Feature](#)
 
 </div>
 
@@ -28,10 +28,11 @@ The project uses transfer learning with a pretrained MobileNetV2 backbone and a 
 
 ## 🚀 Demo
 
+🌐 **Live Application:**
+https://elephant-species-classification.onrender.com/
+
 💻 **GitHub Repository:**
 https://github.com/Mohit01112/elephant-species-classification
-
-> Add your deployed application URL here once the Flask app is deployed.
 
 ---
 
@@ -360,7 +361,7 @@ This project demonstrates practical experience with:
 
 [![GitHub](https://img.shields.io/badge/GitHub-Mohit01112-181717?logo=github&logoColor=white)](https://github.com/Mohit01112)
 
-💻 **[GitHub Repository](https://github.com/Mohit01112/elephant-species-classification)**
+🌐 **[Live Demo](https://elephant-species-classification.onrender.com/)** &nbsp;|&nbsp; 💻 **[GitHub Repository](https://github.com/Mohit01112/elephant-species-classification)**
 
 ⭐ **If you found this project useful, consider giving it a star!** ⭐
 
