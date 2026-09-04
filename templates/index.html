@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ElephantAI | Elephant Classification</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+
+            min-height: 100vh;
+
+            color: #ffffff;
+
+            background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(38, 166, 154, 0.20),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(76, 175, 80, 0.12),
+                    transparent 35%
+                ),
+                #07110f;
+        }
+
+
+        /* -----------------------------
+           NAVBAR
+        ----------------------------- */
+
+        .navbar {
+
+            width: 100%;
+
+            padding: 22px 7%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 21px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 22px;
+
+            background: rgba(52,211,153,0.12);
+
+            border: 1px solid rgba(52,211,153,0.2);
+        }
+
+        .nav-badge {
+
+            padding: 8px 15px;
+
+            border-radius: 30px;
+
+            font-size: 12px;
+
+            color: #8ff5ca;
+
+            background: rgba(52,211,153,0.08);
+
+            border: 1px solid rgba(52,211,153,0.15);
+        }
+
+
+        /* -----------------------------
+           HERO
+        ----------------------------- */
+
+        .hero {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 80px 25px 50px;
+
+            text-align: center;
+        }
+
+        .tag {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 8px 16px;
+
+            border-radius: 30px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #85f5c4;
+
+            background: rgba(52,211,153,0.08);
+
+            border: 1px solid rgba(52,211,153,0.15);
+
+            margin-bottom: 22px;
+        }
+
+        .tag-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #34d399;
+
+            box-shadow: 0 0 12px #34d399;
+        }
+
+        h1 {
+
+            font-size: clamp(42px, 7vw, 76px);
+
+            line-height: 1.02;
+
+            letter-spacing: -4px;
+
+            font-weight: 800;
+
+            margin-bottom: 22px;
+
+        }
+
+        h1 span {
+
+            color: #46e6a5;
+
+        }
+
+        .subtitle {
+
+            max-width: 680px;
+
+            margin: auto;
+
+            color: #9ca9a5;
+
+            font-size: 17px;
+
+            line-height: 1.8;
+        }
+
+
+        /* -----------------------------
+           UPLOAD CARD
+        ----------------------------- */
+
+        .upload-section {
+
+            max-width: 760px;
+
+            margin: 25px auto 80px;
+
+            padding: 0 25px;
+        }
+
+        .upload-card {
+
+            padding: 42px;
+
+            border-radius: 26px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.025)
+                );
+
+            border: 1px solid rgba(255,255,255,0.10);
+
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.35);
+
+            text-align: center;
+        }
+
+        .upload-icon {
+
+            width: 76px;
+
+            height: 76px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 22px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 38px;
+
+            background: rgba(52,211,153,0.10);
+
+            border: 1px solid rgba(52,211,153,0.15);
+        }
+
+        .upload-card h2 {
+
+            font-size: 25px;
+
+            margin-bottom: 10px;
+        }
+
+        .upload-card p {
+
+            color: #8d9995;
+
+            font-size: 14px;
+
+            margin-bottom: 28px;
+        }
+
+
+        /* -----------------------------
+           FILE INPUT
+        ----------------------------- */
+
+        .file-area {
+
+            position: relative;
+
+            border: 1.5px dashed rgba(255,255,255,0.18);
+
+            border-radius: 17px;
+
+            padding: 30px;
+
+            transition: 0.25s;
+        }
+
+        .file-area:hover {
+
+            border-color: rgba(52,211,153,0.55);
+
+            background: rgba(52,211,153,0.03);
+        }
+
+        input[type="file"] {
+
+            width: 100%;
+
+            color: #8d9995;
+
+            margin-bottom: 25px;
+
+            font-size: 14px;
+        }
+
+        input[type="file"]::file-selector-button {
+
+            margin-right: 15px;
+
+            padding: 11px 18px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            color: #ffffff;
+
+            background: rgba(255,255,255,0.10);
+
+        }
+
+
+        /* -----------------------------
+           BUTTON
+        ----------------------------- */
+
+        .predict-btn {
+
+            width: 100%;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            cursor: pointer;
+
+            color: #04120d;
+
+            background: #46e6a5;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            transition: 0.25s;
+
+            box-shadow:
+                0 10px 30px rgba(70,230,165,0.18);
+        }
+
+        .predict-btn:hover {
+
+            transform: translateY(-2px);
+
+            background: #63efb5;
+
+            box-shadow:
+                0 15px 35px rgba(70,230,165,0.28);
+        }
+
+
+        /* -----------------------------
+           FEATURES
+        ----------------------------- */
+
+        .features {
+
+            max-width: 1000px;
+
+            margin: auto;
+
+            padding: 0 25px 80px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+        .feature-card {
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            background: rgba(255,255,255,0.035);
+
+            border: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .feature-icon {
+
+            font-size: 28px;
+
+            margin-bottom: 17px;
+        }
+
+        .feature-card h3 {
+
+            font-size: 16px;
+
+            margin-bottom: 9px;
+        }
+
+        .feature-card p {
+
+            color: #7f8d88;
+
+            line-height: 1.6;
+
+            font-size: 13px;
+        }
+
+
+        /* -----------------------------
+           ERROR
+        ----------------------------- */
+
+        .error {
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            border-radius: 12px;
+
+            color: #ff9b9b;
+
+            background: rgba(255,80,80,0.08);
+
+            border: 1px solid rgba(255,80,80,0.15);
+
+            font-size: 14px;
+        }
+
+
+        /* -----------------------------
+           FOOTER
+        ----------------------------- */
+
+        footer {
+
+            text-align: center;
+
+            padding: 25px;
+
+            color: #56615e;
+
+            font-size: 12px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.05);
+        }
+
+
+        /* -----------------------------
+           RESPONSIVE
+        ----------------------------- */
+
+        @media (max-width: 700px) {
+
+            .features {
+
+                grid-template-columns: 1fr;
+            }
+
+            .upload-card {
+
+                padding: 25px;
+            }
+
+            h1 {
+
+                letter-spacing: -2px;
+            }
+
+            .navbar {
+
+                padding: 18px 5%;
+            }
+
+            .nav-badge {
+
+                display: none;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🐘
+        </div>
+
+        ElephantAI
+
+    </div>
+
+    <div class="nav-badge">
+        AI Classification
+    </div>
+
+</nav>
+
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="tag">
+
+        <span class="tag-dot"></span>
+
+        Powered by MobileNetV2
+
+    </div>
+
+
+    <h1>
+
+        Discover the
+
+        <span>Elephant</span>
+
+    </h1>
+
+
+    <p class="subtitle">
+
+        Upload an elephant image and let our
+        deep learning model identify whether
+        it belongs to the African or Asian
+        elephant class.
+
+    </p>
+
+</section>
+
+
+
+<!-- UPLOAD -->
+
+<section class="upload-section">
+
+    <div class="upload-card">
+
+        <div class="upload-icon">
+            📷
+        </div>
+
+        <h2>
+            Upload an Image
+        </h2>
+
+        <p>
+            JPG, JPEG or PNG • Best results with
+            clear elephant images
+        </p>
+
+
+        <form
+            action="/predict"
+            method="POST"
+            enctype="multipart/form-data">
+
+
+            <div class="file-area">
+
+                <input
+                    type="file"
+                    name="file"
+                    accept=".jpg,.jpeg,.png"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="predict-btn">
+
+                    ✨ Analyze Elephant
+
+                </button>
+
+            </div>
+
+        </form>
+
+
+        {% if error %}
+
+        <div class="error">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+
+<!-- FEATURES -->
+
+<section class="features">
+
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            🧠
+        </div>
+
+        <h3>
+            Deep Learning
+        </h3>
+
+        <p>
+            Uses a MobileNetV2 convolutional
+            neural network trained to recognize
+            elephant classes.
+        </p>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            ⚡
+        </div>
+
+        <h3>
+            Fast Prediction
+        </h3>
+
+        <p>
+            Upload an image and receive a
+            classification result within seconds.
+        </p>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            🌍
+        </div>
+
+        <h3>
+            Two Classes
+        </h3>
+
+        <p>
+            The model currently distinguishes
+            between African and Asian elephants.
+        </p>
+
+    </div>
+
+
+</section>
+
+
+
+<footer>
+
+    ElephantAI • AI-powered Elephant Classification
+
+</footer>
+
+
+</body>
+
+</html>

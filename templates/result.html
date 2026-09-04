@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ElephantAI | Prediction</title>
+
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        * {
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: "Inter", sans-serif;
+
+            min-height: 100vh;
+
+            color: #ffffff;
+
+            background:
+
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(38,166,154,0.18),
+                    transparent 35%
+                ),
+
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(76,175,80,0.12),
+                    transparent 35%
+                ),
+
+                #07110f;
+
+            padding-bottom: 60px;
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+
+            padding: 22px 7%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.07);
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 21px;
+
+            font-weight: 800;
+        }
+
+
+        .logo-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 22px;
+
+            background: rgba(52,211,153,0.12);
+
+            border:
+                1px solid rgba(52,211,153,0.20);
+        }
+
+
+        .back-link {
+
+            color: #8b9995;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+
+        .back-link:hover {
+
+            color: #46e6a5;
+        }
+
+
+        /* MAIN */
+
+        .main {
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 65px 25px;
+        }
+
+
+        .heading {
+
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+
+        .heading .label {
+
+            color: #46e6a5;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 13px;
+        }
+
+
+        .heading h1 {
+
+            font-size: 46px;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .heading p {
+
+            color: #81908b;
+
+            font-size: 15px;
+        }
+
+
+        /* RESULT GRID */
+
+        .result-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.05fr 0.95fr;
+
+            gap: 25px;
+
+            align-items: stretch;
+        }
+
+
+        /* IMAGE */
+
+        .image-card {
+
+            padding: 18px;
+
+            border-radius: 24px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+
+        .image-wrapper {
+
+            width: 100%;
+
+            height: 520px;
+
+            overflow: hidden;
+
+            border-radius: 17px;
+
+            background: #050b09;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .image-wrapper img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+        }
+
+
+        /* RESULT */
+
+        .result-card {
+
+            padding: 34px;
+
+            border-radius: 24px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.025)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.09);
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        .result-label {
+
+            color: #7f8d88;
+
+            font-size: 13px;
+
+            margin-bottom: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.3px;
+        }
+
+
+        .prediction {
+
+            font-size: 40px;
+
+            line-height: 1.1;
+
+            font-weight: 800;
+
+            margin-bottom: 28px;
+
+            color: #46e6a5;
+        }
+
+
+        /* CONFIDENCE */
+
+        .confidence-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 10px;
+
+            font-size: 13px;
+
+            color: #919e9a;
+        }
+
+
+        .confidence-value {
+
+            color: #ffffff;
+
+            font-weight: 700;
+        }
+
+
+        .progress {
+
+            width: 100%;
+
+            height: 10px;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.08);
+
+            overflow: hidden;
+
+            margin-bottom: 10px;
+        }
+
+
+        .progress-bar {
+
+            width: {{ confidence }}%;
+
+            height: 100%;
+
+            border-radius: 20px;
+
+            background: #46e6a5;
+
+        }
+
+
+        .confidence-note {
+
+            color: #697773;
+
+            font-size: 12px;
+
+            margin-bottom: 35px;
+        }
+
+
+        /* EXPLANATION */
+
+        .why-box {
+
+            padding: 22px;
+
+            border-radius: 16px;
+
+            background: rgba(52,211,153,0.045);
+
+            border:
+                1px solid rgba(52,211,153,0.10);
+        }
+
+
+        .why-box h3 {
+
+            font-size: 15px;
+
+            margin-bottom: 12px;
+
+            color: #d8e3df;
+        }
+
+
+        .why-box p {
+
+            color: #86938f;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+
+        .confidence-text {
+
+            margin-top: 12px;
+
+            color: #6e7c77 !important;
+        }
+
+
+        /* BUTTON */
+
+        .new-image {
+
+            display: block;
+
+            margin-top: 25px;
+
+            padding: 15px;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            border-radius: 13px;
+
+            color: #04120d;
+
+            font-weight: 700;
+
+            background: #46e6a5;
+
+            transition: 0.2s;
+        }
+
+
+        .new-image:hover {
+
+            background: #63efb5;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* INFO */
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .result-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .image-wrapper {
+
+                height: 380px;
+            }
+
+            .heading h1 {
+
+                font-size: 35px;
+            }
+
+            .prediction {
+
+                font-size: 32px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🐘
+        </div>
+
+        ElephantAI
+
+    </div>
+
+
+    <a href="/" class="back-link">
+        ← New Prediction
+    </a>
+
+</nav>
+
+
+
+<main class="main">
+
+
+    <div class="heading">
+
+        <div class="label">
+            Analysis Complete
+        </div>
+
+        <h1>
+            Your Prediction
+        </h1>
+
+        <p>
+            The model has analyzed your uploaded elephant image.
+        </p>
+
+    </div>
+
+
+
+    <div class="result-grid">
+
+
+        <!-- IMAGE -->
+
+        <div class="image-card">
+
+            <div class="image-wrapper">
+
+                <img
+                    src="{{ image_url }}"
+                    alt="Uploaded elephant image"
+                >
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RESULT -->
+
+        <div class="result-card">
+
+
+            <div class="result-label">
+                Predicted Class
+            </div>
+
+
+            <div class="prediction">
+
+                {{ prediction }}
+
+            </div>
+
+
+            <div class="confidence-header">
+
+                <span>
+                    Model Confidence
+                </span>
+
+                <span class="confidence-value">
+
+                    {{ "%.2f"|format(confidence) }}%
+
+                </span>
+
+            </div>
+
+
+            <div class="progress">
+
+                <div class="progress-bar"></div>
+
+            </div>
+
+
+            <p class="confidence-note">
+
+                Confidence represents the softmax probability
+                assigned to the predicted class.
+
+            </p>
+
+
+
+            <div class="why-box">
+
+                <h3>
+                    🔍 Why this prediction?
+                </h3>
+
+                <p>
+                    {{ reason }}
+                </p>
+
+                <p class="confidence-text">
+                    {{ confidence_text }}
+                </p>
+
+            </div>
+
+
+
+            <a href="/" class="new-image">
+
+                Analyze Another Image
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+
+
+</main>
+
+
+</body>
+
+</html>
